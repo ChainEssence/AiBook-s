@@ -1,0 +1,68 @@
+{
+  "name": "neurosync-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NeuroSync AI-powered writing assistant landing page",
+  "author": "NeuroSync Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=9.0.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
+    "lint:check": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest --coverage",
+    "predeploy": "npm run lint:check && npm run typecheck && npm run test && npm run build",
+    "clean": "rm -rf .next out dist coverage"
+  },
+  "dependencies": {
+    "next": "14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.3.3",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "14.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-security": "^1.7.1",
+    "jsdom": "^23.0.1",
+    "postcss": "^8.4.32",
+    "prettier": "^3.1.1",
+    "tailwindcss": "^3.3.6",
+    "vitest": "^1.1.0"
+  },
+  "neurosyncAudit": {
+    "date": "2024-12-19",
+    "tool": "Claude Sonnet 4",
+    "changes": [
+      "Added comprehensive linting and formatting",
+      "Implemented strict TypeScript configuration",
+      "Added testing infrastructure with Vitest",
+      "Enhanced security with validation",
+      "Added proper project structure and documentation",
+      "Implemented CI/CD ready scripts"
+    ]
+  }
+}
