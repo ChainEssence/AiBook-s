@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4× Expert Startup Analyzer</title>
+    <meta name="description" content="Get expert analysis of your startup idea from Product, Marketing, Tech, and Business perspectives in seconds.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="wordmark">4× Expert Analyzer</h1>
+                <nav class="header-nav" role="navigation">
+                    <a href="#privacy" class="nav-link">Privacy</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main" role="main">
+        <div class="container">
+            <!-- Restore Banner -->
+            <div id="restore-banner" class="restore-banner hidden" role="alert">
+                <div class="restore-content">
+                    <span class="restore-text">Found your previous analysis. Would you like to restore it?</span>
+                    <div class="restore-actions">
+                        <button id="restore-btn" class="btn btn-secondary">Restore</button>
+                        <button id="dismiss-btn" class="btn btn-ghost">Dismiss</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Section -->
+            <section class="hero" role="region" aria-labelledby="hero-title">
+                <h1 id="hero-title" class="hero-title">Four expert brains on your startup idea</h1>
+                <p class="hero-subtitle">Product, Marketing, Tech, and Analyst—clear, actionable reports in seconds.</p>
+            </section>
+
+            <!-- Form Section -->
+            <section class="form-section" role="region" aria-labelledby="form-title">
+                <div class="form-card">
+                    <h2 id="form-title" class="sr-only">Submit Your Startup Idea</h2>
+                    
+                    <form id="analysis-form" class="analysis-form" novalidate>
+                        <div class="form-group">
+                            <label for="idea-input" class="form-label">Describe your startup idea</label>
+                            <textarea 
+                                id="idea-input" 
+                                name="idea" 
+                                class="form-textarea" 
+                                rows="5" 
+                                maxlength="1000"
+                                placeholder="Describe your idea in a few sentences..."
+                                aria-describedby="char-counter"
+                                required
+                            ></textarea>
+                            <div class="form-footer">
+                                <div id="char-counter" class="char-counter" aria-live="polite">
+                                    <span id="char-count">0</span> / 1,000
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email-input" class="form-label">Email (optional)</label>
+                            <input 
+                                type="email" 
+                                id="email-input" 
+                                name="email" 
+                                class="form-input"
+                                placeholder="your@email.com"
+                                aria-describedby="email-hint"
+                            >
+                            <div id="email-hint" class="form-hint">We'll never share your email or send spam</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-large" id="submit-btn">
+                            <span class="btn-text">Analyze with 4 Experts</span>
+                            <span class="btn-spinner hidden" aria-hidden="true">
+                                <svg class="spinner" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="31.416" stroke-dashoffset="31.416">
+                                        <animate attributeName="stroke-dasharray" dur="2s" values="0 31.416;15.708 15.708;0 31.416" repeatCount="indefinite"/>
+                                        <animate attributeName="stroke-dashoffset" dur="2s" values="0;-15.708;-31.416" repeatCount="indefinite"/>
+                                    </circle>
+                                </svg>
+                            </span>
+                        </button>
+
+                        <p class="form-note">Powered by n8n automations</p>
+                    </form>
+
+                    <!-- Loading State -->
+                    <div id="loading-state" class="loading-state hidden" role="status" aria-live="polite">
+                        <div class="loading-spinner">
+                            <svg class="spinner-large" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="31.416" stroke-dashoffset="31.416">
+                                    <animate attributeName="stroke-dasharray" dur="2s" values="0 31.416;15.708 15.708;0 31.416" repeatCount="indefinite"/>
+                                    <animate attributeName="stroke-dashoffset" dur="2s" values="0;-15.708;-31.416" repeatCount="indefinite"/>
+                                </circle>
+                            </svg>
+                        </div>
+                        <p class="loading-text">Analyzing your idea...</p>
+                    </div>
+
+                    <!-- Error State -->
+                    <div id="error-state" class="error-state hidden" role="alert">
+                        <div class="error-content">
+                            <h3 class="error-title">Something went wrong</h3>
+                            <p id="error-message" class="error-message">We couldn't analyze your idea right now. Please try again.</p>
+                            <div class="error-actions">
+                                <button id="retry-btn" class="btn btn-primary">Try Again</button>
+                                <a href="#contact" class="btn btn-ghost">Contact Support</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results-section" class="results-section hidden" role="region" aria-labelledby="results-title">
+                <div class="results-header">
+                    <h2 id="results-title" class="results-title">Analysis Results</h2>
+                    <button id="new-analysis-btn" class="btn btn-secondary">New Analysis</button>
+                </div>
+
+                <div class="idea-summary">
+                    <h3 class="idea-title">Your Idea</h3>
+                    <p id="analyzed-idea" class="idea-text"></p>
+                </div>
+
+                <div class="results-tabs" role="tablist" aria-label="Expert Analysis Reports">
+                    <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="product-panel" id="product-tab" data-tab="product">
+                        <span class="tab-icon">📊</span>
+                        Product
+                    </button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="marketing-panel" id="marketing-tab" data-tab="marketing">
+                        <span class="tab-icon">📈</span>
+                        Marketing
+                    </button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tech-panel" id="tech-tab" data-tab="tech">
+                        <span class="tab-icon">⚙️</span>
+                        Tech
+                    </button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="analyst-panel" id="analyst-tab" data-tab="analyst">
+                        <span class="tab-icon">💼</span>
+                        Analyst
+                    </button>
+                </div>
+
+                <div class="results-content">
+                    <div id="product-panel" class="tab-panel active" role="tabpanel" aria-labelledby="product-tab">
+                        <div id="product-content" class="markdown-content"></div>
+                    </div>
+                    <div id="marketing-panel" class="tab-panel" role="tabpanel" aria-labelledby="marketing-tab">
+                        <div id="marketing-content" class="markdown-content"></div>
+                    </div>
+                    <div id="tech-panel" class="tab-panel" role="tabpanel" aria-labelledby="tech-tab">
+                        <div id="tech-content" class="markdown-content"></div>
+                    </div>
+                    <div id="analyst-panel" class="tab-panel" role="tabpanel" aria-labelledby="analyst-tab">
+                        <div id="analyst-content" class="markdown-content"></div>
+                    </div>
+                </div>
+
+                <div class="results-actions">
+                    <button id="copy-btn" class="btn btn-secondary">
+                        <span class="btn-icon">📋</span>
+                        Copy
+                    </button>
+                    <button id="download-md-btn" class="btn btn-secondary">
+                        <span class="btn-icon">📄</span>
+                        Download .md
+                    </button>
+                    <button id="download-pdf-btn" class="btn btn-secondary">
+                        <span class="btn-icon">📑</span>
+                        Download PDF
+                    </button>
+                    <button id="share-btn" class="btn btn-ghost">
+                        <span class="btn-icon">🔗</span>
+                        Share Link
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">Built with Lovable + n8n</p>
+                <p class="footer-privacy">Your data is processed securely and not stored permanently</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
