@@ -1,327 +1,144 @@
-# NeuroSync - AI Writing Assistant Platform
+# 4× Expert Startup Analyzer
 
-**Status**: ✅ Production Ready | **Version**: 1.0.0 | **Last Audit**: 2024-12-19
+A premium, production-ready single-page web application that analyzes startup ideas using four expert perspectives: Product Manager, Marketer, Tech Lead, and Business Analyst.
 
-Full-stack platform for NeuroSync AI writing assistant with lead generation landing page and secure backend API.
+## Features
 
-## 🚀 Quick Start
+### Core Functionality
+- **Expert Analysis**: Submit startup ideas and receive detailed reports from 4 expert perspectives
+- **Real-time Processing**: Integrates with n8n webhook API for instant analysis
+- **Markdown Rendering**: Beautiful formatting of expert reports with proper typography
+- **Export Options**: Copy, download as Markdown, or generate PDF reports
+- **Persistent Storage**: Automatically saves and restores analysis results
 
-### Prerequisites
-- Node.js 20.x+ 
-- npm 9.x+
+### Premium UI/UX
+- **Dark Glassmorphism Theme**: Modern design with deep charcoal backgrounds and gold accents
+- **Responsive Design**: Mobile-first approach that works on all devices
+- **Smooth Animations**: Subtle micro-interactions and transitions
+- **Premium Typography**: Playfair Display serif for headings, Inter sans-serif for body text
 
-### Frontend Development
-```bash
-# Install dependencies
-npm install
+### Accessibility & Quality
+- **Full Keyboard Navigation**: Tab through all interactive elements
+- **ARIA Labels**: Comprehensive screen reader support
+- **Focus Management**: Visible focus states and logical tab order
+- **Reduced Motion Support**: Respects user's motion preferences
+- **High Contrast Mode**: Enhanced visibility for accessibility needs
 
-# Start development server
-npm run dev
-```
-Open http://localhost:3000
+### Technical Features
+- **Input Validation**: Client-side validation with character limits and sanitization
+- **Error Handling**: Comprehensive error states with retry functionality
+- **Rate Limiting**: Prevents spam with 5-second cooldown between requests
+- **Timeout Handling**: 30-second request timeout with automatic retry
+- **Local Storage**: Saves analysis results for 24 hours with restore option
 
-### Backend Development
-```bash
-# Navigate to backend
-cd backend
+## API Integration
 
-# Install dependencies
-npm install
+The app integrates with the n8n webhook endpoint:
+- **URL**: `https://n8n.generalovai.ru/webhook-test/lovable`
+- **Method**: POST
+- **Content-Type**: application/json
 
-# Setup database
-npx prisma migrate dev --name init
-
-# Start development server
-npm run dev
-```
-API available at http://localhost:8080
-
-## 📁 Project Structure
-
-```
-├── app/                    # Next.js app directory
-│   ├── layout.tsx         # Root layout with SEO
-│   ├── page.tsx          # Landing page
-│   └── globals.css       # Global styles
-├── components/            # React components
-│   ├── ContactForm.tsx   # Lead generation form
-│   └── PlaceholderFrame.tsx # Image placeholders
-├── lib/                  # Frontend utilities
-│   ├── content.ts       # Content data
-│   └── analytics.ts     # Analytics integration
-├── backend/             # API server
-│   ├── src/            # TypeScript source
-│   │   ├── routes/     # API endpoints
-│   │   ├── lib/        # Utilities
-│   │   └── index.ts    # Server entry
-│   ├── prisma/         # Database schema
-│   └── Dockerfile      # Container config
-├── tests/              # Test files
-├── .github/workflows/  # CI/CD pipeline
-└── public/            # Static assets
+### Request Format
+```json
+{
+  "idea": "Your startup idea description",
+  "email": "optional@email.com"
+}
 ```
 
-## 🔧 Development Commands
-
-### Frontend
-```bash
-npm run dev          # Development server
-npm run build        # Production build
-npm run start        # Production server
-npm run lint         # ESLint check & fix
-npm run format       # Prettier formatting
-npm run typecheck    # TypeScript validation
-npm run test         # Run tests
-npm run predeploy    # Full validation pipeline
+### Response Format
+```json
+{
+  "status": "success",
+  "idea": "Original idea text",
+  "product_manager": "Markdown formatted analysis",
+  "marketer": "Markdown formatted analysis", 
+  "tech": "Markdown formatted analysis",
+  "analyst": "Markdown formatted analysis",
+  "timestamp": "2023-12-07T10:30:00Z"
+}
 ```
 
-### Backend
-```bash
-cd backend
-npm run dev          # Development server
-npm run build        # TypeScript compilation
-npm run start        # Production server
-npm run test         # Run tests
-npm run prisma:studio # Database GUI
-npm run docker:build # Build Docker image
+## File Structure
+
+```
+/workspace/
+├── index.html          # Main HTML structure
+├── styles.css          # Premium CSS with glassmorphism theme
+├── script.js           # Complete JavaScript functionality
+└── README.md          # This documentation
 ```
 
-## 🗄️ Database Management
+## Getting Started
 
-### Development Setup
-```bash
-cd backend
-cp env.example .env
-npx prisma migrate dev --name init
-npx prisma generate
+1. **Local Development**:
+   ```bash
+   cd /workspace
+   python3 -m http.server 8000
+   ```
+   Then open `http://localhost:8000` in your browser.
+
+2. **Production Deployment**:
+   - Upload files to any web server or CDN
+   - Works with static hosting services like Netlify, Vercel, GitHub Pages
+   - No build process required - pure HTML/CSS/JS
+
+## Browser Compatibility
+
+- **Modern Browsers**: Chrome 80+, Firefox 75+, Safari 13+, Edge 80+
+- **Features Used**: 
+  - CSS Grid & Flexbox
+  - CSS Custom Properties
+  - Fetch API with AbortController
+  - Clipboard API with fallback
+  - Local Storage
+  - CSS backdrop-filter
+
+## Security Features
+
+- **Input Sanitization**: Strips HTML tags and dangerous content
+- **HTTPS Required**: Clipboard API requires secure context
+- **No Inline Scripts**: CSP-friendly implementation
+- **XSS Protection**: Proper escaping of user-generated content
+
+## Performance Optimizations
+
+- **Minimal Dependencies**: No external JavaScript libraries
+- **Efficient CSS**: Uses CSS custom properties for theming
+- **Lazy Loading**: Content rendered only when needed
+- **Debounced Interactions**: Prevents excessive API calls
+
+## Customization
+
+### Colors
+Edit CSS custom properties in `styles.css`:
+```css
+:root {
+  --color-gold: #d4af37;
+  --color-charcoal: #1a1a1a;
+  --color-graphite: #2a2a2a;
+  /* ... more colors */
+}
 ```
 
-### Production Migration
-```bash
-npx prisma migrate deploy
+### API Endpoint
+Change the webhook URL in `script.js`:
+```javascript
+this.apiUrl = 'https://your-webhook-url.com/endpoint';
 ```
 
-### Database Schema
-- **Lead**: Contact form submissions with privacy-compliant IP masking
-- **LeadStatus**: NEW, EMAILED, ERROR, PROCESSED
+### Branding
+Update the wordmark and footer text in `index.html`.
 
-## 🔒 Security Features
+## Accessibility Compliance
 
-### Backend Security
-- ✅ Rate limiting (10 req/min per IP)
-- ✅ CORS protection
-- ✅ Helmet security headers
-- ✅ IP address masking (GDPR compliant)
-- ✅ Input validation with Zod
-- ✅ PII-safe logging
-- ✅ Turnstile verification support
+- **WCAG 2.1 AA Compliant**
+- **Semantic HTML**: Proper heading hierarchy and landmarks
+- **Keyboard Navigation**: Full keyboard accessibility
+- **Screen Reader Support**: Comprehensive ARIA labels
+- **Color Contrast**: Meets accessibility standards
+- **Focus Indicators**: Clear visual focus states
 
-### Frontend Security
-- ✅ CSP headers
-- ✅ XSS protection
-- ✅ Input sanitization
-- ✅ Secure form handling
+## License
 
-## 📧 Email Configuration
-
-Set SMTP variables in `.env`:
-```bash
-SMTP_HOST=smtp.example.com
-SMTP_PORT=587
-SMTP_USER=your_user
-SMTP_PASS=your_password
-EMAIL_FROM="NeuroSync <no-reply@neurosync.example>"
-EMAIL_TO="team@neurosync.example"
-```
-
-**Note**: Email is optional - system gracefully degrades if not configured.
-
-## 🤖 Turnstile Setup
-
-Add Cloudflare Turnstile keys:
-```bash
-NEXT_PUBLIC_TURNSTILE_SITE_KEY=your_site_key
-TURNSTILE_SECRET_KEY=your_secret_key
-```
-
-## 📊 Analytics Integration
-
-### Google Analytics 4
-```bash
-NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
-```
-
-### Yandex.Metrica
-```bash
-NEXT_PUBLIC_YM_ID=XXXXXXXX
-```
-
-## 🧪 Testing
-
-### Run All Tests
-```bash
-# Frontend tests
-npm run test
-
-# Backend tests
-cd backend && npm run test
-
-# Coverage report
-npm run test:coverage
-```
-
-### Test Coverage Thresholds
-- Branches: 70%
-- Functions: 80%
-- Lines: 80%
-- Statements: 80%
-
-## 🐳 Docker Deployment
-
-### Build Images
-```bash
-# Backend API
-cd backend
-docker build -t neurosync-api .
-
-# Run locally
-docker run -p 8080:8080 --env-file .env neurosync-api
-```
-
-### Health Checks
-- `GET /healthz` - Application health
-- `GET /ready` - Readiness probe
-
-## ☁️ Cloud Deployment
-
-### Google Cloud Run
-```bash
-# Deploy backend
-cd backend
-gcloud run deploy neurosync-api \
-  --source . \
-  --platform managed \
-  --region us-central1 \
-  --allow-unauthenticated
-
-# Set environment variables
-gcloud run services update neurosync-api \
-  --set-env-vars NODE_ENV=production,FRONTEND_ORIGIN=https://yourdomain.com
-```
-
-### Frontend (Vercel/Netlify)
-```bash
-# Build command
-npm run build
-
-# Environment variables
-NEXT_PUBLIC_API_URL=https://your-api-url
-NEXT_PUBLIC_TURNSTILE_SITE_KEY=your_key
-```
-
-## 🔍 API Endpoints
-
-### Health & Info
-- `GET /healthz` - Health status
-- `GET /api/version` - API version info
-
-### Lead Management
-- `POST /api/demo` - Submit lead form
-  ```json
-  {
-    "name": "Иван Иванов",
-    "email": "ivan@example.com",
-    "project": "Project description",
-    "source": "landing",
-    "turnstileToken": "optional"
-  }
-  ```
-
-## 🎨 Content Management
-
-Edit content in `lib/content.ts`:
-- **hero**: Main headline and subtitle
-- **story**: Client story and testimonial
-- **problems**: Pain points list
-- **agents**: AI agents descriptions
-- **results**: Before/after metrics
-
-## 🖼️ Image Placeholders
-
-Replace placeholders with real images:
-
-1. Add images to `public/images/`
-2. Update components to use Next.js `Image`
-3. Replace `PlaceholderFrame` components
-
-**Placeholder List**:
-- Hero: Interface screenshot
-- Agent screenshots (6 total)
-- Pipeline diagram
-
-## 🚦 CI/CD Pipeline
-
-GitHub Actions workflow includes:
-- ✅ TypeScript compilation
-- ✅ ESLint & Prettier checks
-- ✅ Unit & integration tests
-- ✅ Docker image builds
-- ✅ Security audits
-- ✅ Automated deployments
-
-## 📋 Production Checklist
-
-- [ ] Environment variables configured
-- [ ] Database migrations applied
-- [ ] SMTP credentials set
-- [ ] Analytics tracking enabled
-- [ ] Turnstile keys configured
-- [ ] Real images uploaded
-- [ ] SSL certificates installed
-- [ ] Monitoring configured
-- [ ] Backup strategy implemented
-
-## 🔧 Troubleshooting
-
-### Common Issues
-
-**Database Connection**
-```bash
-# Reset database
-rm backend/data/dev.db
-npx prisma migrate dev --name init
-```
-
-**Build Errors**
-```bash
-# Clear caches
-npm run clean
-rm -rf node_modules package-lock.json
-npm install
-```
-
-**Docker Issues**
-```bash
-# Rebuild without cache
-docker build --no-cache -t neurosync-api .
-```
-
-## 📞 Support
-
-- **Issues**: GitHub Issues
-- **Security**: security@neurosync.example
-- **General**: team@neurosync.example
-
-## 📄 License
-
-MIT License - see [LICENSE](LICENSE) file for details.
-
----
-
-**Audit Information**
-- **Audited by**: Claude Sonnet 4
-- **Date**: 2024-12-19
-- **Status**: Production Ready
-- **Security**: ✅ Passed
-- **Performance**: ✅ Optimized
-- **Accessibility**: ✅ WCAG 2.1 AA Compliant
+This project is built for production use with modern web standards and best practices.
